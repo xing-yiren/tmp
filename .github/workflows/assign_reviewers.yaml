@@ -103,12 +103,8 @@ jobs:
 
           for owner in $root_owners; do
             clean_owner=$(echo "$owner" | sed 's/^@//')
-            if [ "$clean_owner" != "$PR_AUTHOR" ]; then
-              global_reviewers["$clean_owner"]=1
-              echo "Added root reviewer: $clean_owner (excluded PR author)"
-            else
-              echo "Skipped root reviewer $clean_owner (matches PR author)"
-            fi
+            global_reviewers["$clean_owner"]=1
+            echo "Added root reviewer: $clean_owner"
           done
 
           echo -e "\nProcessing each file:"
@@ -154,6 +150,17 @@ jobs:
               global_reviewers["$owner"]=1
             done
             unset file_reviewers
+          done
+
+          # Centralized PR author exclusion
+          declare -A final_reviewers
+          for reviewer in "${!global_reviewers[@]}"; do
+            if [ "$reviewer" != "$PR_AUTHOR" ]; then
+              final_reviewers["$reviewer"]=1
+              echo "Included reviewer: $reviewer (not PR author)"
+            else
+              echo "Excluded reviewer: $reviewer (matches PR author)"
+            fi
           done
 
           # Generate final list
