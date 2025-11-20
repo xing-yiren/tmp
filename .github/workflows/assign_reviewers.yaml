@@ -164,9 +164,9 @@ jobs:
           done
 
           # Generate final list
-          unique_reviewers=$(echo "${!global_reviewers[@]}" | tr ' ' ',' | sed 's/^,//;s/,$//')
+          unique_reviewers=$(echo "${!final_reviewers[@]}" | tr ' ' ',' | sed 's/^,//;s/,$//')
           echo "reviewers=$unique_reviewers" >> $GITHUB_OUTPUT
-          echo -e "\nFinal reviewers: $unique_reviewers"
+          echo -e "\nFinal reviewers (after PR author exclusion): $unique_reviewers"
 
       - name: Assign reviewers and comment
         if: >
