@@ -8,5 +8,5 @@ permissions:
 
 jobs:
   label-hardware:
-    uses: mindspore-courses/.github/.github/workflows/assign_reviewers.yaml@master
+    uses: mindspore-courses/.github/.github/workflows/label_issue.yaml@master
     secrets: inherit
