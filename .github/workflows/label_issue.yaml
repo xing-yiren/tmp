@@ -8,7 +8,5 @@ permissions:
 
 jobs:
   label-hardware:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call org-wide issue labeling workflow
-        uses: mindspore-courses/.github/.github/workflows/label_issue.yaml@master
+    uses: mindspore-courses/.github/.github/workflows/assign_reviewers.yaml@master
+    secrets: inherit
