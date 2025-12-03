@@ -5,8 +5,6 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  get-reviewers:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call org-wide reviewer assignment workflow
-        uses: mindspore-courses/.github/.github/workflows/assign_reviewers.yaml@master
+  assign-reviewers:
+    uses: mindspore-courses/.github/.github/workflows/assign_reviewers.yaml@master
+    secrets: inherit
